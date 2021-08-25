@@ -1,0 +1,42 @@
+server:
+  port: 8081
+  max-http-header-size: 16KB
+  shutdown: graceful
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+        order_inserts: true
+        order_updates: true
+  application:
+    name: basic
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /v2/docs
+---
+spring:
+  profiles: default
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/basic?characterEncoding=UTF-8&connectTimeout=60000&socketTimeout=60000&rewriteBatchedStatements=true&serverTimezone=UTC
+    username: root
+    password: 1q2w3e4r
+logging:
+  level:
+    com.basic: debug
